@@ -7,7 +7,9 @@ Enlisted the basic and get-started query for the SQL interview
 
 
 Q . Find the 3rd Largest Salary from the Employee table.
-          
+
+To create a Dataframe or TempTable, follow tbl_creation.txt and search `3rd_Largest_Salary`.
+
 +---------------+--------------------+------+-------------+
 |       Emp_name|                Role|Salary|Date of Birth|
 +---------------+--------------------+------+-------------+
@@ -23,7 +25,7 @@ Q . Find the 3rd Largest Salary from the Employee table.
 |  Olivia Nguyen|  Accounting Analyst| 75000|   1989-07-10|
 +---------------+--------------------+------+-------------+
 
-Created Temp table as `EmpInfo` and spark dataframe as `df`
+Created Temp table as `EmpInfo` and spark Dataframe as `df`
 
 SQL: "SELECT * FROM EmpInfo ORDER BY Salary DESC LIMIT 2,1"
 
@@ -33,7 +35,7 @@ Pyspark : result_df = spark.createDataFrame(df.orderBy("salary", ascending=False
           result_df.show(truncate=False)
 
 
-For the creation of dataframe or TempTable, follow tbl_creation.txt and search `3rd_Largest_Salary`. 
+ 
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
