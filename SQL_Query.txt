@@ -132,7 +132,7 @@ Spark.SQL --  spark.sql("Delete from EmpInfo where Emp_id not in ( select min(Em
 
 Pyspark  -- 
 
-    A.                res = spark.sql("select * from empinfo")
+    A.                res = spark.sql("select * from EmpInfo")
                     res.dropDuplicates(["Emp_name", "Role", "Salary", "DOB"]).show()
 
 
