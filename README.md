@@ -17,3 +17,14 @@ Enlisted the basic and get started query for SQL interview
 |  Olivia Nguyen|  Accounting Analyst| 75000|   1989-07-10|
 +---------------+--------------------+------+-------------+
 
+df = spark.createDataFrame(data, schema=["Emp_name", "Role", "Salary", "Date of Birth"])
+
+df.createOrReplaceTempView("EmpInfo")
+
+SQL : "SELECT * FROM EmpInfo ORDER BY Salary DESC LIMIT 2,1"
+
+Spark.SQL  : spark.sql("SELECT * FROM EmpInfo ORDER BY Salary DESC LIMIT 10 OFFSET 1").show()
+
+Pyspark : result_df = spark.createDataFrame(df.orderBy("salary", ascending=False).limit(3).tail(1))
+          result_df.show(truncate=False)
+
