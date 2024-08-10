@@ -8,7 +8,7 @@ Enlisted the basic and get-started query for the SQL interview
 
 Q . Find the 3rd Largest Salary from the Employee table.
 
-To create a Dataframe or TempTable, follow tbl_creation.txt and search `Emp_tbl_for_Largest_Salary`.
+**To create a Dataframe or TempTable, follow tbl_creation.txt and search `Emp_tbl_for_Largest_Salary`.
 
 +---------------+--------------------+------+-------------+
 |       Emp_name|                Role|Salary|Date of Birth|
@@ -36,6 +36,65 @@ Pyspark : result_df = spark.createDataFrame(df.orderBy("salary", ascending=False
 
 
  
+Advanced Version Of Largest Salary : 
+
+
+Q. Find the `N` highest salary from the table without using Top/Limit keyword
+
+**To create a Dataframe or TempTable, follow tbl_creation.txt and search `Emp_tbl_for_Largest_Salary`.
+
++---------------+--------------------+------+-------------+
+|       Emp_name|                Role|Salary|Date of Birth|
++---------------+--------------------+------+-------------+
+|       John Doe|   Software Engineer| 80000|   1985-05-15|
+|     Jane Smith|     Product Manager| 90000|   1982-11-20|
+|Michael Johnson|        Data Analyst| 65000|   1988-03-01|
+|    Emily Davis|         UX Designer| 75000|   1990-08-12|
+|      David Lee|          IT Support| 50000|   1992-01-30|
+|      Sarah Kim|Marketing Coordin...| 55000|   1987-06-25|
+|     Tom Wilson|     Project Manager| 85000|   1983-09-18|
+|  Jessica Brown|       HR Specialist| 60000|   1991-04-03|
+|  Robert Garcia|Sales Representative| 70000|   1986-11-28|
+|  Olivia Nguyen|  Accounting Analyst| 75000|   1989-07-10|
++---------------+--------------------+------+-------------+
+
+SQL : select * from EmpInfo e1 where `< N - 1 >` = (select count(distinct(salary)) from EmpInfo e2 where e2.salary > e1.salary
+
+Spark.SQL: spark.sql("select * from EmpInfo e1 where `< N - 1 >` = (select count(distinct(salary)) from EmpInfo e2 where e2.salary > e1.salary) ").show()
+
+Pyspark : 
+
+A.
+                    from pyspark.sql import Window
+                    from pyspark.sql.functions import count, col, desc, dense_rank
+                    
+                    # Create a window specification
+                    window_spec = Window.orderBy(desc("Salary"))
+                    
+                    # Apply the logic
+                    result = (spark.table("EmpInfo")
+                        .withColumn("salary_rank", dense_rank().over(window_spec))
+                        .filter(col("salary_rank") == `< N >`)
+                        .drop("salary_rank"))
+                    
+                    # Show the result
+                    result.show(truncate=False)
+
+
+B.
+                    
+                    from pyspark.sql.functions import count, col
+                    
+                    # Main query using join
+                    result = (spark.table("EmpInfo").alias("e1")
+                        .join(spark.table("EmpInfo").alias("e2"), col("e2.Salary") > col("e1.Salary"), "left")
+                        .groupBy("e1.Emp_name", "e1.Role", "e1.Salary", "e1.Date of Birth")
+                        .agg(count("e2.Salary").alias("higher_salary_count"))
+                        .filter(col("higher_salary_count") == `< N - 1 >`)
+                        .select("e1.*"))
+                    
+                    # Show the result
+                    result.show(truncate=False)
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
