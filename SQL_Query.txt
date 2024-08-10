@@ -8,7 +8,7 @@ Enlisted the basic and get-started query for the SQL interview
 
 Q . Find the 3rd Largest Salary from the Employee table.
 
-To create a Dataframe or TempTable, follow tbl_creation.txt and search `3rd_Largest_Salary`.
+To create a Dataframe or TempTable, follow tbl_creation.txt and search `Emp_tbl_for_Largest_Salary`.
 
 +---------------+--------------------+------+-------------+
 |       Emp_name|                Role|Salary|Date of Birth|
