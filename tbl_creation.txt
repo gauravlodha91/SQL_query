@@ -32,4 +32,33 @@ df.createOrReplaceTempView("EmpInfo")
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+Item : `Emp_tbl_for_Duplicate_Records`
+
+
+CREATE TABLE IF NOT EXISTS EmpInfo 
+  (Emp_id INT, Emp_name STRING, Role STRING, Salary INT, DOB DATE )
+
+
+
+INSERT INTO EmpInfo
+VALUES 
+    (1002,  'Jane Smith',      'Product Manager',       90000,  '1982-11-20'),
+    (1001,  'John Doe',        'Software Engineer',     80000,  '1985-05-15'),
+    (1035,  'Jane Smith',      'Product Manager',       90000,  '1982-11-20'),
+    (1024,  'Jane Smith',      'Product Manager',       90000,  '1982-11-20'),
+    (1026,  'Michael Johnson', 'Data Analyst',          65000,  '1988-03-01'),
+    (1034,  'Emily Davis',     'UX Designer',           75000,  '1990-08-12'),
+    (1042,  'David Lee',       'IT Support',            50000,  '1992-01-30'),
+    (1050,  'Sarah Kim',       'Marketing Coordinator', 55000,  '1987-06-25'),
+    (4052,  'Tom Wilson',      'Project Manager',       85000,  '1983-09-18'),
+    (1245,  'Tom Wilson',      'Project Manager',       85000,  '1983-09-18'),
+    (1089,  'Tom Wilson',      'Project Manager',       85000,  '1983-09-18'),
+    (4025,  'Jessica Brown',   'HR Specialist',         60000,  '1991-04-03'),
+    (1212,  'Robert Garcia',   'Sales Representative',  70000,  '1986-11-28'),
+    (1313,  'Olivia Nguyen',   'Accounting Analyst',    75000,  '1989-07-10')
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
